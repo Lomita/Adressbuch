@@ -3,8 +3,8 @@
 require 'dataBaseConnection.php';
 
 // Initialisierung
-$error = $message =  '';
-$firstname = $lastname = $email = $username = '';
+  $error = $message =  '';
+  $firstname = $lastname = $email = $username = '';
 
 // Wurden Daten mit "POST" gesendet?
 if($_SERVER['REQUEST_METHOD'] == "POST"){
