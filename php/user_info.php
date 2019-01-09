@@ -84,9 +84,9 @@
 
                                     if($_SERVER['REQUEST_METHOD'] == "POST"){
 
-                                        echo "<pre>";
+                                       /* echo "<pre>";
                                         print_r($_POST);
-                                        echo "</pre>";
+                                        echo "</pre>";*/
                                         
                                         
                                        // vorname vorhanden, mindestens 1 Zeichen und maximal 30 Zeichen lang
