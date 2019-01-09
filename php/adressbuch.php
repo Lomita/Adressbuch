@@ -197,50 +197,71 @@
                                       <div class="form-group ">
                                       <label class="control-label requiredField" for="firstname">
                                       Vorname
+                                      <span class="asteriskField">
+                                        *
+                                      </span>
                                       </label>
-                                      <input class="form-control" id="firstname" name="firstname" type="text" maxlength="30"/>
+                                      <input class="form-control" id="firstname" name="firstname" type="text" maxlength="30" required/>
                                       </div>
                                       <div class="form-group ">
                                       <label class="control-label requiredField" for="lastname">
                                       Nachname
+                                      <span class="asteriskField">
+                                        *
+                                      </span>
                                       </label>
-                                      <input class="form-control" id="lastname" name="lastname" type="text" maxlength="30"/>
+                                      <input class="form-control" id="lastname" name="lastname" type="text" maxlength="30" required/>
                                       </div>
                                       <div class="form-group ">
                                       <label class="control-label requiredField" for="email">
                                       Email
+                                      <span class="asteriskField">
+                                        *
+                                      </span>
                                       </label>
-                                      <input class="form-control" id="email" name="email" placeholder="example@exp.com" type="email"/>
+                                      <input class="form-control" id="email" name="email" placeholder="example@exp.com" type="email" required/>
                                       </div>
                                       <div class="form-group ">
                                       <label class="control-label requiredField" for="description">
                                       Beschreibung
+                                      <span class="asteriskField">
+                                        *
+                                      </span>
                                       </label>
-                                      <textarea class="form-control" cols="40" id="description" maxlength="1000" name="description" placeholder="Kontakt Beschreibung" rows="3"></textarea>
+                                      <textarea class="form-control" cols="40" id="description" maxlength="1000" name="description" placeholder="Kontakt Beschreibung" rows="3" required></textarea>
                                       </div>
                                       <div class="form-group ">
                                       <label class="control-label requiredField" for="phone">
                                       Tel.
                                       </label>
-                                      <input type="text" pattern="[0-9]{3} [0-9]{3} [0-9]{2} [0-9]{2}" class="form-control" id="phone" name="phone" placeholder="070 123 45 67"/>
+                                      <input type="text" pattern="[0-9]{3} [0-9]{3} [0-9]{2} [0-9]{2}" class="form-control" id="phone" name="phone" placeholder="070 123 45 67" required/>
                                       </div>
                                       <div class="form-group ">
                                       <label class="control-label requiredField" for="place">
                                       Ort
+                                      <span class="asteriskField">
+                                        *
+                                      </span>
                                       </label>
-                                      <input class="form-control" id="place" maxlength="100" name="place" type="text"/>
+                                      <input class="form-control" id="place" maxlength="100" name="place" type="text" required/>
                                       </div>
                                       <div class="form-group ">
                                       <label class="control-label requiredField" for="plz">
                                       PLZ
+                                      <span class="asteriskField">
+                                        *
+                                      </span>
                                       </label>
-                                      <input class="form-control" id="plz" name="plz" pattern="[0-9]{4}" type="text"/>
+                                      <input class="form-control" id="plz" name="plz" pattern="[0-9]{4}" type="text" required/>
                                       </div>
                                       <div class="form-group ">
                                       <label class="control-label requiredField" for="date">
                                       Datum
+                                      <span class="asteriskField">
+                                        *
+                                      </span>
                                       </label>
-                                      <input class="form-control" id="date" name="date" type="date"/>
+                                      <input class="form-control" id="date" name="date" type="date" required/>
                                       </div>
                                       <div class="form-group">
                                           <div class="float-right">
