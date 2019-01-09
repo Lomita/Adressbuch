@@ -1,8 +1,6 @@
 <?php
     require 'dataBaseConnection.php';
     session_start();
-
-
 ?>
 
 <!doctype html>
@@ -14,7 +12,7 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <title>Adressbuch Pro | Übersicht</title>
+        <title>Adressbuch Pro | Konto Übersicht</title>
         </head>
     <body>
         <div class="container">  
@@ -28,6 +26,7 @@
                     <ul class="navbar-nav mr-auto ">
                     
                         <?php
+                        
                         if(empty($error))
                         {
 
@@ -70,14 +69,14 @@
                                 <li class="nav-item active ">
                                     <a class="nav-link align-middle" >Angemeldet als '.$_SESSION['username'].' <span class="sr-only">(current)</span></a>
                                 </li>';
-                            else
+                            else{
                                 echo '<li class="nav-item active">
                                         <a class="nav-link" align="right" href="login.php">Anmelden <span class="sr-only">(current)</span></a>
                                     </li>
                                     <li class="nav-item active">
                                         <a class="nav-link" href="register.php">Registrieren <span class="sr-only">(current)</span></a>
                                     </li>';
-
+                            }
 
                                     $error = $message =  '';
                                     $firstname = $lastname = $email = $username = '';
@@ -88,71 +87,69 @@
                                         echo "<pre>";
                                         print_r($_POST);
                                         echo "</pre>";
-                                        // vorname vorhanden, mindestens 1 Zeichen und maximal 30 Zeichen lang
-                                        if(isset($_POST['firstname']) && !empty(trim($_POST['firstname'])) && strlen(trim($_POST['firstname'])) <= 30){
-                                            // Spezielle Zeichen Escapen > Script Injection verhindern
-                                            $firstname = htmlspecialchars(trim($_POST['firstname']));
-                                        } else {
-                                        // Ausgabe Fehlermeldung
-                                        $error = "Geben Sie bitte einen korrekten Vornamen ein.<br />";
-                                        }
-                                
+                                        
+                                        
+                                       // vorname vorhanden, mindestens 1 Zeichen und maximal 30 Zeichen lang
+                                    if(!empty(trim($_POST['change_firstname'])) && strlen(trim($_POST['change_firstname'])) <= 30){
+                                    $firstname = htmlspecialchars(trim($_POST['change_firstname']));
+                                    }else {
+                                    $error .= "Geben Sie bitte einen korrekten Vornamen ein.<br />";}
+
                                 // nachname vorhanden, mindestens 1 Zeichen und maximal 30 zeichen lang
-                                if(isset($_POST['lastname']) && !empty(trim($_POST['lastname'])) && strlen(trim($_POST['lastname'])) <= 30){
-                                // Spezielle Zeichen Escapen > Script Injection verhindern
-                                $lastname = htmlspecialchars(trim($_POST['lastname']));
-                                } else {
-                                // Ausgabe Fehlermeldung
-                                $error .= "Geben Sie bitte einen korrekten Nachnamen ein.<br />";
-                                }
+                                if(!empty(trim($_POST['change_lastname'])) && strlen(trim($_POST['change_lastname'])) <= 30){
+                                    $lastname = htmlspecialchars(trim($_POST['change_lastname']));
+                                 } else {
+                                    $error .= "Geben Sie bitte einen korrekten Nachnamen ein.<br />";}
+
                                 // emailadresse vorhanden, mindestens 1 Zeichen und maximal 100 zeichen lang
-                                if(isset($_POST['email']) && !empty(trim($_POST['email'])) && strlen(trim($_POST['email'])) <= 100){
-                                $email = htmlspecialchars(trim($_POST['email']));
-                                // korrekte emailadresse?
-                                if (filter_var($email, FILTER_VALIDATE_EMAIL) === false){
-                                $error .= "Geben Sie bitte eine korrekte Email-Adresse ein<br />";
-                                }
-                                } else {
-                                // Ausgabe Fehlermeldung
-                                $error .= "Geben Sie bitte eine korrekte Email-Adresse ein.<br />";
-                                }// passwort vorhanden, mindestens 8 Zeichen
-                                if(isset($_POST['password']) && !empty(trim($_POST['password']))){
-                                $password = trim($_POST['password']);
-                                //entspricht das passwort unseren vorgaben? (minimal 8 Zeichen, Zahlen, Buchstaben, keine Zeilenumbrüche, mindestens ein Gross- und ein Kleinbuchstabe)
-                                if(!preg_match("/(?=^.{8,}$)((?=.*\d+)(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/", $password)){
-                                $error .= "Das Passwort entspricht nicht dem geforderten Format.<br />";
-                                }
-                                } else {
-                                // Ausgabe Fehlermeldung
-                                $error .= "Geben Sie bitte einen korrekten Nachnamen ein.<br />";
+                                /*if(!empty(trim($_POST['search_mail'])) && strlen(trim($_POST['search_mail'])) <= 100)
+                                {
+                                    $email = htmlspecialchars(trim($_POST['search_mail']));
+                                    if (filter_var($email, FILTER_VALIDATE_EMAIL) === false){
+                                        $error .= "Geben Sie bitte eine korrekte Email-Adresse ein<br />";
+                                } 
+                                else {
+                                    $error .= "Geben Sie bitte eine korrekte Email-Adresse ein.<br />";
+                                }}*/// passwort vorhanden, mindestens 8 Zeichen
+                                if(isset($_POST['password']) && !empty(trim($_POST['password'])))
+                                {
+                                    $password = trim($_POST['password']);
+                                    //entspricht das passwort unseren vorgaben? (minimal 8 Zeichen, Zahlen, Buchstaben, keine Zeilenumbrüche, mindestens ein Gross- und ein Kleinbuchstabe)
+                                    if(!preg_match("/(?=^.{8,}$)((?=.*\d+)(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/", $password))
+                                    {
+                                        $error .= "Das Passwort entspricht nicht dem geforderten Format.<br />";
+                                    } 
+                                    else{ 
+                                        $error .= "Geben Sie bitte einen korrekten Nachnamen ein.<br />";}
                                 }
                                 
-                                        if(empty($error))
-                                        {
-                                            $password = htmlspecialchars(trim($_POST['password']));
-                                            $firstname = htmlspecialchars(trim($_POST['firstname']));
-                                            $lastname = htmlspecialchars(trim($_POST['lastname']));
-                                            $email = htmlspecialchars(trim($_POST['email']));
-                                            
-                                            $password = password_hash($password, PASSWORD_DEFAULT);
-                                    
-                                            $query = "INSERT INTO users (email, firstname, lastname, password)
-                                            VALUES (?,?,?,?); ";
-                                    
-                                            $stmt = $mysqli->prepare($query);
-                                            $stmt->bind_param('ssss', $email, $firstname,$lastname,$password);		
-                                            $stmt->execute();
-                                    
-                                            $result = $stmt->get_result();
-                                            $stmt->close();
-                                            
-                                            echo($result);
-                                    
-                                            //header("Location: login.php");
-                                        }
+                                echo $error;
+                                    if(empty($error))
+                                    {
+                                        
+                                        //$password = htmlspecialchars(trim($_POST['password']));
+                                        $firstname = htmlspecialchars(trim($_POST['change_firstname']));
+                                        $lastname = htmlspecialchars(trim($_POST['change_lastname']));
+                                        //$email = htmlspecialchars(trim($_POST['search_mail']));
+                                        
+                                        $password = password_hash($password, PASSWORD_DEFAULT);
+                                
+                                        $query = "UPDATE users SET lastname=?,firstname=? WHERE username = ?; ";
+                                
+                                        $stmt = $mysqli->prepare($query);
+                                        $stmt->bind_param('sss', /*$email, $firstname,*/$lastname,$firstname,$_SESSION['username']);		
+                                        $stmt->execute();
+                                
+                                        $result = $stmt->get_result();
+                                        $stmt->close();
+                                        
+                                        echo($result);
+                                
+                                        header("Location: user_info.php");
                                     }
+                                }
+                            
                         ?>
-                        
                     </ul>    
                 </div>
             </nav>
@@ -210,8 +207,8 @@
                     $("#btn_change").on("click",function(){
                         $("#lastname").prop('disabled', false);
                         $("#firstname").prop('disabled', false);
-                        $("#email").prop('disabled', false);
-                        $("#password").prop('disabled', false);
+                        //$("#email").prop('disabled', false);
+                        //$("#password").prop('disabled', false);
                     })
         </script> 
     </body>
